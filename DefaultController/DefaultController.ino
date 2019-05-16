@@ -96,20 +96,20 @@ void toggleControllerMode()
 // from 0 to <range>
 int readAxis(int axis)
 {
-  // read the analog input
+  // Read the analog input
   int reading = analogRead(axis);
 
-  // map the reading from the analog input range to the output range:
+  // Map the reading from the analog input range to the output range:
   int mappedReading = map(reading, 0, AxisMaxInput, 0, AxisMaxOutput);
 
-  // if the output reading is outside from the rest position threshold, use it:
+  // If the output reading is outside from the rest position threshold, use it:
   int distanceFromCenter = mappedReading - MappedCenter;
 
   if (abs(distanceFromCenter) < MappedThreshold) {
     distanceFromCenter = 0;
   }
 
-  // return the distance for this axis:
+  // Return the distance for this axis:
   return distanceFromCenter;
 }
 
