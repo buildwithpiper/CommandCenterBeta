@@ -1,35 +1,35 @@
 /*
-  Button
+  ButtonTest
 
-  Turns ON the Aruduino on-board light emitting diode(LED) connected to digital pin 13,
-  when the button No.1 (UP) connected to pin 6 is pressed
+  Turns on the Aruduino on-board Light Emitting Diode (LED) connected to 
+  digital pin 13, when button No.1 (UP) connected to pin 6 is pressed.
 
 */
 
 // Constants won't change. They're used here to set pin numbers:
-const int buttonPin = 6;     // the number of the pushbutton pin
-const int ledPin =  13;      // the number of the LED pin
+const int buttonPin = 6;     // The number of the button pin
+const int ledPin =  13;      // The number of the LED pin
 
 // Variables will change:
-int buttonState = 0;         // Variable for reading the pushbutton status
+int buttonState = 0;         // A variable for reading the button state
 
 void setup() {
   // Initialize the LED pin as an output:
   pinMode(ledPin, OUTPUT);
-  // Initialize the pushbutton pin as an input:
+  // Initialize the button pin as an input:
   pinMode(buttonPin, INPUT_PULLUP);
 }
 
 void loop() {
-  // Read the state of the pushbutton value:
+  // Read the state of the button pin:
   buttonState = digitalRead(buttonPin);
 
-  // Check if the pushbutton is pressed. If it is, the buttonState is Low:
+  // Check if the button is pressed. If it is, the buttonState is LOW:
   if (buttonState == LOW) {
-    // Turn LED on:
+    // Turn the LED on by setting its pin state to HIGH:
     digitalWrite(ledPin, HIGH);
   } else {
-    // Turn LED off:
+    // Turn the LED off by setting its pin state to LOW:
     digitalWrite(ledPin, LOW);
   }
 }
