@@ -1,0 +1,20 @@
+/*
+  Joystick controls the speed of the on-board LED blinking. 
+*/
+
+const int yAxis = A0;         // joystick Y axis
+const int ledPin = 13;         // Mouse control LED
+
+void setup() {
+  pinMode(ledPin, OUTPUT);         // the LED pin
+}
+
+void loop() {
+  // read and scale the two axes:
+  int reading =analogRead(A0);
+   digitalWrite(ledPin, HIGH);   // turn the LED on (HIGH is the voltage level)
+   delay(reading);                       // wait for a second
+   digitalWrite(ledPin, LOW);    // turn the LED off by making the voltage LOW
+   delay(reading);                       // wait for a second
+}
+
