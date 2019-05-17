@@ -57,16 +57,10 @@ void loop() {
 
   int horizontalInput = readAxis(HorizontalAxisPin);
   int verticalInput = readAxis(VerticalAxisPin);
-  if (horizontalInput > 0) {
-    printMessageIfPressed(JoystickRight, abs(horizontalInput) > MappedThreshold);
-  } else {
-    printMessageIfPressed(JoystickLeft, abs(horizontalInput) > MappedThreshold);
-  }
-  if (verticalInput < 0) {
-    printMessageIfPressed(JoystickUp, abs(verticalInput) > MappedThreshold);
-  } else {
-    printMessageIfPressed(JoystickDown, abs(verticalInput) > MappedThreshold);
-  }
+  printMessageIfPressed(JoystickLeft, horizontalInput < -MappedThreshold);
+  printMessageIfPressed(JoystickUp, verticalInput < -MappedThreshold);
+  printMessageIfPressed(JoystickRight, horizontalInput > MappedThreshold);
+  printMessageIfPressed(JoystickDown, verticalInput > MappedThreshold);
 }
 
 void printMessageIfPressed(char * message, bool isPressed) {
@@ -92,4 +86,3 @@ int readAxis(int axis) {
   // Return the distance for this axis:
   return distanceFromCenter;
 }
-
