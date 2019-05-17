@@ -46,36 +46,37 @@ const int KeyboardModeMap[8] = {
     'c',              // RightButton
     ' ',              // UpButton
     'x',              // DownButton
-    KEY_LEFT_ARROW,   // Not applicable
-    KEY_RIGHT_ARROW,  // Not applicable
-    KEY_UP_ARROW,     // Not applicable
-    KEY_DOWN_ARROW,   // Not applicable
+    KEY_LEFT_ARROW,   // JoystickLeft
+    KEY_RIGHT_ARROW,  // JoystickRight
+    KEY_UP_ARROW,     // JoystickUp
+    KEY_DOWN_ARROW,   // JoystickDown
 };
 
+#define NOT_MAPPED 0
 // Eight elements to correspond to the button. Each map to a mouse or keyboard
 // action. Change these to map the buttons in Mouse/Keyboard Mode
 const int MouseAndKeyboardModeMap[8] = {
-    ' ',              // LeftButton
+    MOUSE_LEFT,       // LeftButton
     MOUSE_RIGHT,      // RightButton
     'x',              // UpButton
-    MOUSE_LEFT,       // DownButton
-    KEY_RIGHT_ARROW,  // JoystickRight
-    KEY_LEFT_ARROW,   // JoystickLeft
-    KEY_UP_ARROW,     // JoystickUp
-    KEY_DOWN_ARROW,   // JoystickDown
+    'y',              // DownButton
+    NOT_MAPPED,       // Not applicable
+    NOT_MAPPED,       // Not applicable
+    NOT_MAPPED,       // Not applicable
+    NOT_MAPPED,       // Not applicable
 };
 
 // This is set on the mode toggle
 int *currentModeMap = KeyboardModeMap;
 
 const int AxisMaxInput = 1023;
-const int AxisMaxOutput = 8;
+const int AxisMaxOutput = 16;
 
-const uint8_t MOUSE_MOVE_DELAY = 5;
+const uint8_t MOUSE_MOVE_DELAY = 8;
 // Global variable for the last time the mouse (aka joystick) was moved
 unsigned long lastMouseMovement = 0;
 
-int MappedThreshold = 2;               // resting threshold, mapped
+int MappedThreshold = 3;               // resting threshold, mapped
 int MappedCenter = AxisMaxOutput / 2;  // resting position value, mapped
 
 void toggleControllerMode() {
