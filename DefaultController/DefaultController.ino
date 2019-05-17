@@ -21,7 +21,7 @@ enum ArduinoPinMap {
 
 // We will use the Joystick press to toggle between these modes
 enum ControllerMode {
-  // Controller actions drive keyboard presses)
+  // Controller actions drive keyboard presses
   KeyboardControllerMode,
   // Controller actions drive mouse keyboard presses
   MouseAndKeyboardControllerMode,
@@ -40,7 +40,7 @@ enum InputAction {
   // We leave out the JoystickPress, since that's a toggle action.
 };
 
-// 8 elements to correspond to the button. Each map to a keyboard action
+// Eight elements to correspond to the button. Each map to a keyboard action
 // Change these to map the buttons in Keyboard Mode
 const int KeyboardModeMap[8] =
   { 'z',                        // LeftButton
@@ -53,9 +53,8 @@ const int KeyboardModeMap[8] =
     KEY_DOWN_ARROW,             // Not applicable
   };
 
-// 8 elements to correspond to the button. Each map to a mouse or keyboard
-// action
-// Change these to map the buttons in Mouse/Keyboard Mode
+// Eight elements to correspond to the button. Each map to a mouse or keyboard
+// action. Change these to map the buttons in Mouse/Keyboard Mode
 const int MouseAndKeyboardModeMap[8] =
   { ' ',                        // LeftButton
     MOUSE_RIGHT,                // RightButton
@@ -70,8 +69,8 @@ const int MouseAndKeyboardModeMap[8] =
 // This is set on the mode toggle
 int * currentModeMap = KeyboardModeMap;
  
-int AxisMaxInput = 1023;
-int AxisMaxOutput = 8;
+const int AxisMaxInput = 1023;
+const int AxisMaxOutput = 8;
 
 const uint8_t MOUSE_MOVE_DELAY = 5;
 // Global variable for the last time the mouse (aka joystick) was moved
@@ -142,10 +141,10 @@ void handleJoystick() {
   int horizontalInput = readAxis(HorizontalAxisPin);
   int verticalInput = readAxis(VerticalAxisPin);
   if (controllerMode == MouseAndKeyboardControllerMode) {
-    // Take the horizontal and vertibal input and move the mouse
+    // Take the horizontal and vertical input and move the mouse
     Mouse.move(horizontalInput, verticalInput, 0);
   } else {
-    // Or, convert the horizontal and vertibal input and move the mouse
+    // Or, convert the horizontal and vertical input and move the mouse
     if (horizontalInput > 0) {
       buttonPress(JoystickRight, abs(horizontalInput) > MappedThreshold);
     } else {
