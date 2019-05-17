@@ -139,20 +139,11 @@ void handleJoystick() {
     // Take the horizontal and vertical input and move the mouse
     Mouse.move(horizontalInput, verticalInput, 0);
   } else {
-    // Or, convert the horizontal and vertical input and move the mouse
-    if (horizontalInput > 0) {
-      buttonPress(JoystickRight, abs(horizontalInput) > MappedThreshold);
-    } else {
-      buttonPress(JoystickLeft, abs(horizontalInput) > MappedThreshold);
-    }
-
-    if (verticalInput < 0) {
-      // This is a little counter-intuitive, but this maps to the controller
-      // action
-      buttonPress(JoystickUp, abs(verticalInput) > MappedThreshold);
-    } else {
-      buttonPress(JoystickDown, abs(verticalInput) > MappedThreshold);
-    }
+    // Control arrow keys using joystick
+    buttonPress(JoystickLeft, horizontalInput < -MappedThreshold);
+    buttonPress(JoystickUp, verticalInput < -MappedThreshold);
+    buttonPress(JoystickRight, horizontalInput > MappedThreshold);
+    buttonPress(JoystickDown, verticalInput > MappedThreshold);
   }
 }
 
