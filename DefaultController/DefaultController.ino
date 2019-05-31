@@ -67,7 +67,7 @@ const int MouseAndKeyboardModeMap[8] = {
 };
 
 // This is set on the mode toggle
-int *currentModeMap = KeyboardModeMap;
+const int *currentModeMap = KeyboardModeMap;
 
 const int AxisMaxInput = 1023;
 const int AxisMaxOutput = 16;

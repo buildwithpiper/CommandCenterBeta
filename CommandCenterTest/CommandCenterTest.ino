@@ -63,7 +63,7 @@ void loop() {
   printMessageIfPressed(JoystickDown, verticalInput > MappedThreshold);
 }
 
-void printMessageIfPressed(char * message, bool isPressed) {
+void printMessageIfPressed(const char * message, bool isPressed) {
   if (isPressed) {
     Serial.println(message);
   }
