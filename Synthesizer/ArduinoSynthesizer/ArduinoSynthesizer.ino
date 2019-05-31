@@ -67,6 +67,7 @@ void loop()
       Serial.print("B3e");
     else if(!digitalRead(RightButtonPin))
       Serial.print("B4e");
+      
     //update last button read time
     prevButtonTime=currentTime;
   }

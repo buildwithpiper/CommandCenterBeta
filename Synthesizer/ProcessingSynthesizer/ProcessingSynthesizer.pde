@@ -21,7 +21,7 @@ import processing.serial.*;
 Serial port;                       // Create object from Serial class
 Sound s;                           //Create sound
 
-int lf = 'e';                      // Linefeed in ASCII for serial communication
+int lineFeed = 'e';                      // Linefeed in ASCII for serial communication
 
 
 TriOsc pulse = new TriOsc(this);   // Create and start the sine oscillator
@@ -53,9 +53,10 @@ void setup()
   String portName = Serial.list()[PortNumber];
   port = new Serial(this, portName, 9600);
   port.clear();
+  
   // Throw out the first reading, in case we started reading 
   // in the middle of a string from the sender.
-  port.readStringUntil(lf);
+  port.readStringUntil(lineFeed);
 
   // Create a Sound object for globally controlling the output volume.
   s = new Sound(this);
@@ -63,6 +64,7 @@ void setup()
   //set background, image should be placed in the 'data' folder in the same directory as this code
   freqAmpGraphImage = loadImage("freqAmpGraph.png");
   background(freqAmpGraphImage);
+  
   //make any drawing fill color red
   fill(255,0,0);
 }
@@ -70,11 +72,12 @@ void setup()
 void draw() 
 {
   String serialString = null;
+  
   //check for serial port incoming data
   while (port.available() > 0) 
   {
     //read input data from serial port until the 'end of line'  character is reached
-    serialString = port.readStringUntil(lf);
+    serialString = port.readStringUntil(lineFeed);
     //println(serialString);                  //for debug
     if (serialString!=null && serialString.length()>2) 
     {
@@ -89,6 +92,7 @@ void draw()
         //set the frequency shift for the button note
         freqShift=map(Integer.parseInt(payload), 0, 1024, -freqShiftRange, freqShiftRange);
       }
+      
       //Y axis measurement
       if (commandType=='Y')
       {
@@ -99,6 +103,7 @@ void draw()
       }
       
       long currentTime=millis();
+      
       //Button press
       if (commandType=='B') 
       {
@@ -110,7 +115,8 @@ void draw()
         float yPos=map(amplitude,0,1,264,14);
         
         //update background for note display
-        background(freqAmpGraphImage); 
+        background(freqAmpGraphImage);
+        
         //draw a cricle of radius 20 at the frequency and amplitude
         circle(freq+imgXOffset,yPos,20); 
         
@@ -118,6 +124,7 @@ void draw()
         prevTime=currentTime;
         pulse.play(freq, 1);
       }
+      
       //Stop the note if it's been played more than 200ms
       if (currentTime-prevTime>200)
       {
